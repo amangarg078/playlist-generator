@@ -19,20 +19,21 @@ class PlaylistCreator(object):
             for _file in filenames:
                 extension = os.path.splitext(_file)[1]
                 if extension in ['.mp4', '.mp3', '.mkv', '.aac']:
-                    media_files.append(_file)
+                    media_files.append(_file.encode("utf-8"))
 
             # no file to add to playlist
             if not media_files:
                 continue
             playlist_filename = os.path.split(root)[-1]
             playlist_path = os.path.join(root, "Playlist - " + playlist_filename + ".m3u")
+            media_files.sort()
             self.create_playlist(playlist_path, media_files)
 
 if __name__ == '__main__':
     # take the target root directory as argument
     parser = argparse.ArgumentParser()
     parser.add_argument("directory", help="Select the root directory",
-                    type=str, nargs='?', default=os.getcwd())
+                    type=unicode, nargs='?', default=os.getcwd())
     args = parser.parse_args()
     directory = args.directory
 
