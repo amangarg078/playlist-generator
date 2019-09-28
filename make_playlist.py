@@ -44,7 +44,7 @@ if __name__ == '__main__':
     # take the target root directory as argument
     parser = argparse.ArgumentParser()
     parser.add_argument("directory", help="Select the root directory",
-                    type=unicode, nargs='?', default=os.getcwd())
+                    type=lambda s: unicode(s, 'utf8'), nargs='?', default=os.getcwd())
     args = parser.parse_args()
     directory = args.directory
 
